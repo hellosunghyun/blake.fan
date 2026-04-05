@@ -1,1 +1,0 @@
-This folder contains the built output assets for the worker "blake-fan" generated at 2026-04-05T09:13:14.241Z.

@@ -6,6 +6,7 @@
 .env*
 !.env.example
 
+dist/
 node_modules/
 .DS_Store
 .playwright-mcp/
