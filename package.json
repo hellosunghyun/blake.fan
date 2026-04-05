@@ -1,0 +1,14 @@
+{
+  "name": "blake-fan",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate:local": "wrangler d1 execute blake-fan --local --file=./migrations/0001_create_guestbook.sql",
+    "db:migrate": "wrangler d1 execute blake-fan --remote --file=./migrations/0001_create_guestbook.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0",
+    "@cloudflare/workers-types": "^4.20250401.0"
+  }
+}

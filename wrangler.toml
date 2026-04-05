@@ -1,0 +1,11 @@
+name = "blake-fan"
+main = "src/index.ts"
+compatibility_date = "2025-04-01"
+
+[assets]
+directory = "public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "blake-fan"
+database_id = "a917ed4f-b7b0-45ed-891f-0285970f4ced"
