@@ -1,0 +1,35 @@
+name: Deploy blake-fan
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-blake-fan-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Assert migrated target configuration
+        run: |
+          grep -q 'account_id = "eb6fe20e69220f2d40744831f85ed230"' wrangler.toml
+          grep -q 'database_id = "0f3ac866-91ca-4794-ac32-7135f00936f8"' wrangler.toml
+          grep -q 'name = "blake-fan"' wrangler.toml
+      - run: npm ci
+      - name: Deploy existing migrated Worker
+        run: npm run deploy
+        env:
+          CLOUDFLARE_ACCOUNT_ID: eb6fe20e69220f2d40744831f85ed230
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_BLAKE_FAN_API_TOKEN }}
